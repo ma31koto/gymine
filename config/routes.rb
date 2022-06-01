@@ -4,6 +4,11 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
+    resources :posts do
+    resources :areas, only: [:index, :create, :edit, :update, :destroy]
+    resources :machines, only: [:index, :create, :edit, :update, :destroy]
+    resources :body_parts, only: [:index, :create, :edit, :update, :destroy]
+    end
   end
 
   devise_for :users, skip: [:passwords], controllers: {
@@ -13,6 +18,11 @@ Rails.application.routes.draw do
 
   namespace :public do
     root :to => "homes#top"
+    resources :posts, only: [:show] do
+      collection do
+        get 'map_search' => 'posts#map_search'
+      end
+    end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

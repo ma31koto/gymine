@@ -11,6 +11,12 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render 'layouts/header' %>
+    <main>
+      <p id="notice"><%= notice %></p>
+      <%= yield %>
+    </main>
+    <%= render 'layouts/page_top' %>
+    <%= render 'layouts/footer' %>
   </body>
 </html>
