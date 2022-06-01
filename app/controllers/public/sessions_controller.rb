@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Public::SessionsController < Devise::SessionsController
-  # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
   # def new
@@ -25,9 +24,9 @@ class Public::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
   protected
-  
+
   def after_sign_in_path_for(resource)
-    customer_path(current_customer)
+     map_search_posts_path
   end
 
   def after_sign_out_path_for(resource)
