@@ -1,0 +1,38 @@
+<% if machine.name.nil? %>
+  <%= form_with model:machine, url: admin_machines_path, method: :post, local: true do |f|  %>
+    <div class="row ml-md-5 mb-md-4">
+      <div class="font-weight-bold d-flex align-items-center ml-md-4">
+        <%= f.label :name, "マシン名" %>
+      </div>
+      <div class="ml-md-3">
+        <%= f.text_field :name, placeholder: "マシン名", size: 30 %>
+        <% if flash[:danger].present?  %>
+          <p style="color: red;">名前を入力してください</p>
+        <% end %>
+      </div>
+      <div class="ml-md-3">
+        <%= f.submit "新規登録", class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <%= form_with model:machine, url: admin_machine_path(machine), method: :patch, local: true do |f|  %>
+    <div class="row font-weight-bold">
+      <%= f.label :name, "マシン名" %>
+      <div class="ml-md-3">
+        <%= f.text_field :name, size: 30 %>
+        <% if @machine.errors.include?(:name) %>
+          <p style="color: red;">
+            <%= machine.errors.full_messages_for(:name).first %>
+          </p>
+        <% end %>
+      </div>
+      <div class="ml-md-5">
+        <%= f.submit "変更", class: "btn btn-success", style: "width: 100px;" %>
+      </div>
+      <div class="ml-md-3">
+        <%= link_to "削除", admin_machine_path(machine), method: :delete, data: { confirm: '本当に消しますか？'}, class: "btn btn-danger", style: "width: 100px;" %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

@@ -1,6 +1,6 @@
 class Machine < ApplicationRecord
   has_many :machine_types, dependent: :destroy
-  has_many :post, through: :machine_types
+  has_many :posts, through: :machine_types
 
   validates :name, presence: true, uniqueness: true
   

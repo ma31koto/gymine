@@ -5,10 +5,10 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :posts do
+    end
     resources :areas, only: [:index, :create, :edit, :update, :destroy]
     resources :machines, only: [:index, :create, :edit, :update, :destroy]
     resources :body_parts, only: [:index, :create, :edit, :update, :destroy]
-    end
   end
 
   devise_for :users, skip: [:passwords], controllers: {

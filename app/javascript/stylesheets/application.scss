@@ -9,13 +9,26 @@
 
 body {
   min-height: 100vh;
-  background-color: rgb(214, 165, 247);
-// 　background-image: linear-gradient(-225deg, #5271C4 0%, #B19FFF 48%, #ECA1FE 100%);
+  background-color: #9966CC;
 }
 
+header {
+  background-color: black;
+  color: white;
+}
 
 html {
   scroll-behavior: smooth;
+}
+
+#map {
+  width: 1150px;
+  height: 500px;
+}
+
+#map_new {
+  width: 1150px;
+  height: 500px;
 }
 
 .page-top {
@@ -50,4 +63,22 @@ html {
 
 .page-top:hover {
   color: #BDB76B;
+}
+
+.post-name {
+  font-size: 30px;
+}
+
+.post-item {
+  background-color: #262626;
+  padding: 10px;
+  margin-top: 3px;
+  color: white;
+}
+
+.post-form-item {
+  background-color: #404040;
+  padding: 10px;
+  margin-top: 3px;
+  color: white;
 }

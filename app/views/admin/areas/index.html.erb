@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 mt-md-5">
+      <h2>
+        <mark class="bg-secondary text-light">エリア一覧・追加
+        </mark>
+      </h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 mt-md-5 offset-md-2">
+      <%= render 'form', area: @area %>
+      <table class="table text-light col-md-8">
+        <thead class="list-header">
+          <tr>
+            <th width="10%"></th>
+            <th width="60%">エリア名</th>
+            <th width="30%"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @areas.each do |area| %>
+            <tr>
+              <td></td>
+              <td>
+                <%= area.name %>
+              </td>
+              <td>
+                <%= link_to "編集する", edit_admin_area_path(area), class:"btn btn-success" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

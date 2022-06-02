@@ -28,7 +28,7 @@ class Admin::MachinesController < ApplicationController
   end
 
   def destroy
-    @area.destroy
+    @machine.destroy
     redirect_to admin_machines_path, notice: 'マシン名を削除しました!'
   end
 

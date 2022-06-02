@@ -1,0 +1,217 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 mt-md-5">
+      <h2>
+        <mark class="bg-secondary text-light">スポット投稿
+        </mark>
+      </h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 mt-md-5">
+      <input id="address" type="textbox" value="" size="50">
+      <input type="button" value="地図を検索" onclick="codeAddress()" class="mt-md-0 mt-2">
+      <div id='map_new' class="mt-md-3"></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 mt-md-5 text-center">
+      <%= form_with model:@post, url: admin_posts_path, method: :post, local: true do |f| %>
+        <div class="row text-left offset-md-1">
+          <div class="col-md-4 post-item ml-md-0">
+            <%= f.label :name, "名前" %>
+          </div>
+          <div class="col-md-7 post-form-item">
+            <%= f.text_field :name, :placeholder =>"例：筋肉ジム(新宿店)", size:50, class: "post-form" %>
+            <% if @post.errors.include?(:name) %>
+              <a style="color: red;">
+                <%= @post.errors.full_messages_for(:name).first %>
+              </a>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="row text-left  offset-md-1">
+          <div class="col-md-4 post-item ml-md-0">
+            <%= f.label :introduction, "説明文" %>
+          </div>
+          <div class="col-md-7 post-form-item">
+            <%= f.text_area :introduction, :placeholder =>"例:平日の昼時は人が少なく穴場です！", size: "50x5", class: "post-form" %>
+            <% if @post.errors.include?(:introduction) %>
+              <a style="color: red;">
+                <%= @post.errors.full_messages_for(:introduction).first %>
+              </a>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="row text-left offset-md-1">
+          <div class="col-md-4 post-item ml-md-0">
+            <%= f.label :postal_code, "郵便番号" %>
+          </div>
+          <div class="col-md-7 post-form-item">
+            <%= f.text_field :postal_code, :placeholder =>"自動入力",id: "postal_code", size: 50, class: "post-form" %>
+            <% if @post.errors.include?(:postal_code) %>
+              <a style="color: red;">
+                <%= @post.errors.full_messages_for(:postal_code).first %>
+              </a>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="row text-left  offset-md-1">
+          <div class="col-md-4 post-item ml-md-0">
+            <%= f.label :address, "住所" %>
+          </div>
+          <div class="col-md-7 post-form-item">
+            <%= f.text_field :address, :placeholder =>"自動入力", id: "input_address", size: 50, class: "post-form" %>
+            <% if @post.errors.include?(:address) %>
+              <a style="color: red;">
+                <%= @post.errors.full_messages_for(:address).first %>
+              </a>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="row text-left offset-md-1">
+          <div class="col-md-4 post-item ml-md-0">
+            <%= f.label :area_id, "エリア" %>
+          </div>
+          <div class="col-md-7 post-form-item">
+            <%= f.collection_select :area_id, Area.all, :id, :name, include_blank: "----", class: "post-control", size: 50 %>
+            <% if @post.errors.include?(:area_id) %>
+              <p style="color: red;">
+                <%= @post.errors.full_messages_for(:area_id).first %>
+              </p>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="row text-left  offset-md-1">
+          <div class="col-md-4 post-item ml-md-0">
+            <%= f.label :post_image, "スポット画像" %>
+          </div>
+          <div class="col-md-7 post-form-item">
+            <%= f.file_field :post_image, accept: "image/*", style: "width: 95%;" %>
+          </div>
+        </div>
+
+        <div class="row text-left  offset-md-1">
+          <div class="col-md-4 post-item ml-md-0">
+            <%= f.label :machines, "マシン" %>
+          </div>
+          <div class="col-md-7 post-form-item">
+            <div class="checkbox">
+              <%= collection_check_boxes(:post, :machine_ids, Machine.all, :id, :name, include_hidden: false) do |m| %>
+                <%= m.label {m.check_box + m.text} %><br>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-md-3">
+          <%= f.hidden_field :longitude, id: "longitude" %>
+          <%= f.hidden_field :latitude, id: "latitude" %>
+          <%= f.submit "投稿", class: "btn btn-primary", style: "width: 150px;" %>
+        </div>
+
+
+
+
+
+      <% end %>
+    </div>
+  </div>
+
+  <script>
+    //地図機能
+    let map_new;
+    const longitude = document.getElementById('longitude');
+    const latitude = document.getElementById('latitude');
+    let marker;
+    function formatAddress(results) {
+      const formattedAddress = results[0].formatted_address;
+      const postalCode = formattedAddress.match(/〒[0-9]{3}-[0-9]{4}/);
+      if(!!postalCode) {
+        $("#postal_code").val(postalCode[0].slice(1));
+      }
+      const address = formattedAddress.split('、')[1].split(' ')[1];
+      $("#input_address").val(address);
+    }
+
+    // mapの表示関数
+    function initMap() {
+      geocoder = new google.maps.Geocoder();
+      marker = new google.maps.Marker();
+      // mapの初期位置, 縮尺を定義
+      map_new = new google.maps.Map(document.getElementById('map_new'), {
+        center: {lat: 35.66520323974399,lng: 139.75420730521716},
+        zoom: 12,
+      });
+
+      // mapsテーブルにあるそれぞれのレコードをmap上に表示
+      <% if @post.latitude.present? && @post.longitude.present? %>
+        function showPins(setNull = false){
+          var contentString = "住所：<%= @post.address %>";
+          // マーカーを立てる
+          marker = new google.maps.Marker({
+            position:{lat: <%= @post.latitude %>, lng: <%= @post.longitude %>},
+            map: map_new,
+            title: contentString
+          });
+        };
+        showPins();
+      <% end %>
+
+      // クリックしたときの処理
+      google.maps.event.addListener(map_new, 'click', mylistener);
+      function mylistener(event){
+        const currentLocation = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng());
+        // マーカーを立てる
+        marker.setPosition(currentLocation);
+        marker.setMap(map_new);
+        geocoder.geocode({
+          'latLng': currentLocation,
+        }, (results, status) => {
+          if(status === google.maps.GeocoderStatus.OK) {
+            formatAddress(results);
+          } else {
+            alert('何かしらの障害です。')
+          }
+        });
+
+        latitude.value = event.latLng.lat();
+        longitude.value = event.latLng.lng();
+      }
+    }
+
+     // 地図検索関数
+    function codeAddress() {
+      let inputAddress = document.getElementById('address').value;
+
+      geocoder.geocode({'address': inputAddress},function (results, status) {
+        if (status == 'OK') {
+          map_new.setCenter(results[0].geometry.location);
+
+          // 再検索で前回のピンを消す
+          marker.setMap(null);
+          marker = new google.maps.Marker({
+            map: map_new,
+            position: results[0].geometry.location
+          });
+          // 検索した場所の情報をfieldフォームに渡す
+          const lat = marker.getPosition().lat();
+          const lng = marker.getPosition().lng();
+          $("#latitude").val(lat);
+          $("#longitude").val(lng);
+          formatAddress(results);
+        } else {
+          alert('該当する結果がありませんでした：' + status);
+        }
+      });
+    }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>
+</div>

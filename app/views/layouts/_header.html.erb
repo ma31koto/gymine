@@ -2,9 +2,9 @@
     <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light">
       <% if user_signed_in? %>
-        <span class="ml-3 text-left">ようこそ、<%= current_user.name %>さん！</span>
+        ようこそ、<%= current_user.name %>さん！
       <% elsif admin_signed_in? %>
-        <span class="ml-3 text-left">管理者ログイン中</span>
+        管理者ログイン中
       <% end %>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"  style="background-color: #BDB76B;">
@@ -12,39 +12,39 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav ml-auto av-link text-light btn">
+        <ul class="navbar-nav ml-auto text-light btn">
         <% if user_signed_in? %>
           <li>
-            <%= link_to "マップ検索", map_search_posts_path, class: "nav-link text-light btn ml-2" %>
+            <%= link_to "マップ検索", map_search_posts_path, class: "border border-white text-light btn ml-md-2" %>
           </li>
           <li>
-            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link text-light btn ml-2" %>
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "border border-white text-light btn ml-md-2" %>
           </li>
         <% elsif admin_signed_in? %>
           <li>
-            <%= link_to "スポット一覧", admin_posts_path, class: "nav-link text-light btn ml-2" %>
+            <%= link_to "スポット一覧", admin_posts_path, class: "border border-white text-light btn ml-2" %>
           </li>
           <li>
-            <%= link_to "マシン一覧", post_machines_path, class: "nav-link text-light btn ml-2" %>
+            <%= link_to "マシン一覧", admin_machines_path, class: "border border-white text-light btn ml-md-2" %>
           </li>
           <li>
-            <%= link_to "部位一覧", admin_body_parts_path, class: "nav-link text-light btn ml-2" %>
+            <%= link_to "部位一覧", admin_body_parts_path, class: "border border-white text-light btn ml-md-2" %>
           </li>
           <li>
-            <%= link_to "エリア一覧", admin_areas_path, class: "nav-link text-light btn ml-2" %>
+            <%= link_to "エリア一覧", admin_areas_path, class: "border border-white text-light btn ml-md-2" %>
           </li>
           <li>
-            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link text-light btn ml-2" %>
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "border border-white text-light btn ml-md-2" %>
           </li>
         <% else %>
           <li>
-            <%= link_to "Home", root_path, class: "nav-link text-light btn" %>
+            <%= link_to "Home", root_path, class: "nav-link btn" %>
           </li>
           <li>
-            <%= link_to "新規登録", new_user_registration_path, class: "nav-link text-light btn ml-2" %>
+            <%= link_to "新規登録", new_user_registration_path, class: "border border-white text-light btn ml-md-2" %>
           </li>
           <li>
-            <%= link_to "ログイン", new_user_session_path, class: "nav-link text-light btn ml-2" %>
+            <%= link_to "ログイン", new_user_session_path, class: "border border-white text-light btn ml-md-2" %>
           </li>
         <% end %>
         </ul>

@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 mt-md-5">
+      <h2>
+        <mark class="bg-secondary text-light">マシン一覧・追加
+        </mark>
+      </h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 mt-md-5 offset-md-2">
+      <%= render 'form', machine: @machine %>
+      <table class="table text-light col-md-8">
+        <thead class="list-header">
+          <tr>
+            <th width="10%"></th>
+            <th width="60%">マシン名</th>
+            <th width="30%"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @machines.each do |machine| %>
+            <tr>
+              <td></td>
+              <td>
+                <%= machine.name %>
+              </td>
+              <td>
+                <%= link_to "編集する", edit_admin_machine_path(machine), class:"btn btn-success" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

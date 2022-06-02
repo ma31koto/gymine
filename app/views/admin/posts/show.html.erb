@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 mt-md-5">
+      <h2>
+        <mark class="bg-secondary text-light">スポット詳細
+        </mark>
+      </h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 mt-md-5">
+      <div class="post-name">
+        <%= @post.name %>
+      </div>
+      <%= image_tag @post.get_post_image, size:"1000x500" %>
+      <div>
+        <%= @post.postal_code %>
+        <%= @post.address %>
+        <%= @post.introduction %>
+        <% @post.machines.each do |machine| %>
+          <%= machine.name %>,
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+</div>

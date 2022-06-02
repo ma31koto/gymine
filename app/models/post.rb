@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+  has_many :machine_types, dependent: :destroy
+  has_many :machines, through: :machine_types
   belongs_to :area
   
   validates :postal_code, presence: true, format: { with: /\A\d{3}[-]\d{4}\z/ }
@@ -10,6 +12,7 @@ class Post < ApplicationRecord
   validates :area_id, presence: true
   
   has_one_attached :post_image
+  attr_accessor :machine_ids
 
   def get_post_image
     post_image.attached? ? post_image : 'no_image.jpg'
