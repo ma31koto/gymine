@@ -14,17 +14,21 @@
       <table class="table text-light col-md-8">
         <thead class="list-header">
           <tr>
-            <th width="10%"></th>
             <th width="60%">マシン名</th>
-            <th width="30%"></th>
+            <th width="30%">部位</th>
+            <th width="10%"></th>
           </tr>
         </thead>
         <tbody>
           <% @machines.each do |machine| %>
             <tr>
-              <td></td>
               <td>
                 <%= machine.name %>
+              </td>
+              <td>
+                <% machine.body_parts.each do |body_part| %>
+                  <%= body_part.name %>,
+                <% end %>
               </td>
               <td>
                 <%= link_to "編集する", edit_admin_machine_path(machine), class:"btn btn-success" %>

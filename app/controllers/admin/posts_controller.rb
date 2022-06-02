@@ -17,9 +17,9 @@ class Admin::PostsController < ApplicationController
     @post = Post.new(post_params)
     if @post.save
       post_params[:machine_ids].each do | postm |
-        machine = MachineType.new(machine_id: postm)
-        machine.post_id = @post.id
-        machine.save
+      machine = MachineType.new(machine_id: postm)
+      machine.post_id = @post.id
+      machine.save
       end
       redirect_to admin_post_path(@post), notice: 'スポットを投稿完了しました!'
     else

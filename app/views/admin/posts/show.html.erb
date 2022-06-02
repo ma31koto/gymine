@@ -20,6 +20,9 @@
         <%= @post.introduction %>
         <% @post.machines.each do |machine| %>
           <%= machine.name %>,
+          <% machine.body_parts.each do |body_part| %>
+            <%= body_part.name %>,
+          <% end %>
         <% end %>
       </div>
     </div>

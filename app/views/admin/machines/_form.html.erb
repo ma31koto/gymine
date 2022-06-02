@@ -1,13 +1,18 @@
 <% if machine.name.nil? %>
   <%= form_with model:machine, url: admin_machines_path, method: :post, local: true do |f|  %>
     <div class="row ml-md-5 mb-md-4">
-      <div class="font-weight-bold d-flex align-items-center ml-md-4">
+      <div class="font-weight-bold align-items-center">
         <%= f.label :name, "マシン名" %>
       </div>
       <div class="ml-md-3">
         <%= f.text_field :name, placeholder: "マシン名", size: 30 %>
         <% if flash[:danger].present?  %>
           <p style="color: red;">名前を入力してください</p>
+        <% end %>
+      </div>
+      <div class="checkbox ml-md-3">
+        <%= collection_check_boxes(:machine, :body_part_ids, BodyPart.all, :id, :name, include_hidden: false) do |b| %>
+          <%= b.label {b.check_box + b.text} %>
         <% end %>
       </div>
       <div class="ml-md-3">
@@ -25,6 +30,11 @@
           <p style="color: red;">
             <%= machine.errors.full_messages_for(:name).first %>
           </p>
+        <% end %>
+      </div>
+      <div class="checkbox ml-md-3">
+        <%= collection_check_boxes(:machine, :body_part_ids, BodyPart.all, :id, :name, include_hidden: false) do |b| %>
+          <%= b.label {b.check_box + b.text} %>
         <% end %>
       </div>
       <div class="ml-md-5">

@@ -10,6 +10,11 @@ class Admin::MachinesController < ApplicationController
   def create
     @machine = Machine.new(machine_params)
     if @machine.save
+      machine_params[:body_part_ids].each do | machineb |
+        body_part = MachineBody.new(body_part_id: machineb)
+        body_part.machine_id = @machine.id
+        body_part.save
+      end
       redirect_to admin_machines_path, notice: 'マシン名を作成しました!'
     else
       flash[:danger] = @machine.errors.full_messages
@@ -35,7 +40,7 @@ class Admin::MachinesController < ApplicationController
   private
 
   def machine_params
-    params.require(:machine).permit(:name, :machine_image)
+    params.require(:machine).permit(:name, :machine_image, body_part_ids: [])
   end
 
   def set_machine
