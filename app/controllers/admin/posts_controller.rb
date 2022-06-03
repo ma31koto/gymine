@@ -17,9 +17,9 @@ class Admin::PostsController < ApplicationController
     @post = Post.new(post_params)
     if @post.save
       post_params[:machine_ids].each do | postm |
-      machine = MachineType.new(machine_id: postm)
-      machine.post_id = @post.id
-      machine.save
+        machine = MachineType.new(machine_id: postm)
+        machine.post_id = @post.id
+        machine.save
       end
       redirect_to admin_post_path(@post), notice: 'スポットを投稿完了しました!'
     else
@@ -32,15 +32,12 @@ class Admin::PostsController < ApplicationController
   end
 
   def update
-    @post = Post.find(params[id])
+    @post = Post.find(params[:id])
     if @post.update(post_params)
       post_params[:machine_ids].each do | postm |
-          machines = @post.machines.pluck(:machine_id)
-          unless machines.include?(machinem.to_i)
-            machine = MachineType.new(machine_id: machine)
-            machine.post_id = @post.id
-            machine.save
-          end
+        machine = MachineType.new(machine_id: machine)
+        machine.post_id = @post.id
+        machine.save
       end
       redirect_to admin_post_path(@post), notice: 'スポット投稿を変更しました!'
     else
@@ -49,7 +46,7 @@ class Admin::PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[id])
+    @post = Post.find(params[:id])
     @post.destroy
     redirect_to admin_posts_path, notice: 'スポット投稿を削除しました!'
   end

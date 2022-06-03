@@ -38,7 +38,7 @@
             </span>
             <%= @post.name %>
           </div>
-          
+
           <div class="post-info-box">
             <span class="post-info-item">
               <strong>住所</strong>
@@ -49,7 +49,7 @@
             </div>
           </div>
         </div>
-          
+
         <div class="col-md-5">
           <div class="post-info-box">
             <span class="post-info-item">
@@ -57,17 +57,31 @@
             </span>
             <%= @post.introduction %>
           </div>
-        </div>    
+        </div>
       </div>
     </div>
 
     <div class="tabbox">
-      <% @post.machines.each do |machine| %>
-        <%= machine.name %>,
-        <% machine.body_parts.each do |body_part| %>
-          <%= body_part.name %>,
+      <div class="row mb-md-3 p-md-5">
+        <% @post.machines.each do |machine| %>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-4 offset-md-1">
+                <div class="border-bottom border-white">
+                  <%= machine.name %>
+                </div>
+                効果部位：
+                <% machine.body_parts.each do |body_part| %>
+                  <%= body_part.name %>,
+                <% end %>
+              </div>
+              <div class="col-md-5">
+                <%= image_tag machine.get_machine_image, size: "300x200" %>
+              </div>
+            </div>
+          </div>
         <% end %>
-      <% end %>
+      </div>
     </div>
   </div>
 </div>

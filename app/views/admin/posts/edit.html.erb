@@ -18,7 +18,7 @@
 
   <div class="row">
     <div class="col-md-12 mt-md-5 text-center">
-      <%= form_with model:@post, url: admin_posts_path, method: :post, local: true do |f| %>
+      <%= form_with model:@post, url: admin_post_path(@post), method: :patch, local: true do |f| %>
         <div class="row text-left offset-md-1">
           <div class="col-md-4 post-item ml-md-0">
             <%= f.label :name, "名前" %>
@@ -114,21 +114,17 @@
         <div class="mt-md-3">
           <%= f.hidden_field :longitude, id: "longitude" %>
           <%= f.hidden_field :latitude, id: "latitude" %>
-          <%= f.submit "投稿", class: "btn btn-primary", style: "width: 150px;" %>
+          <%= f.submit "変更", class: "btn btn-primary mr-md-3", style: "width: 150px;" %>
+          <%= link_to "削除", admin_post_path(@post),  method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger", style: "width: 150px;" %>
         </div>
-
-
-
-
-
       <% end %>
     </div>
   </div>
 
   <script>
     //地図機能
-    let map_new;
-    const longitude = document.getElementById('longitude');
+    let map_edit
+    const longitude = document.getElementById('longitude')
     const latitude = document.getElementById('latitude');
     let marker;
     function formatAddress(results) {
@@ -143,35 +139,33 @@
 
     // mapの表示関数
     function initMap() {
-      geocoder = new google.maps.Geocoder();
+      geocoder = new google.maps.Geocoder()
       marker = new google.maps.Marker();
       // mapの初期位置, 縮尺を定義
-      map_new = new google.maps.Map(document.getElementById('map_new'), {
-        center: {lat: 35.66520323974399,lng: 139.75420730521716},
+      map_edit = new google.maps.Map(document.getElementById('map_edit'), {
+        center: {lat: <%= @post.latitude %>,lng: <%= @post.longitude %>},
         zoom: 12,
       });
 
-      // mapsテーブルにあるそれぞれのレコードをmap上に表示
-      <% if @post.latitude.present? && @post.longitude.present? %>
-        function showPins(setNull = false){
-          var contentString = "住所：<%= @post.address %>";
-          // マーカーを立てる
-          marker = new google.maps.Marker({
-            position:{lat: <%= @post.latitude %>, lng: <%= @post.longitude %>},
-            map: map_new,
-            title: contentString
-          });
-        };
-        showPins();
-      <% end %>
+       // mapsテーブルにあるそれぞれのレコードをmap上に表示
+      function showPins(setNull = false){
+        var contentString = "住所：<%= @post.address %>";
+        // マーカーを立てる
+        marker = new google.maps.Marker({
+          position:{lat: <%= @post.latitude %>, lng: <%= @post.longitude %>},
+          map: map_edit,
+          title: contentString
+        });
+      };
+      showPins();
 
       // クリックしたときの処理
-      google.maps.event.addListener(map_new, 'click', mylistener);
+      google.maps.event.addListener(map_edit, 'click', mylistener);
       function mylistener(event){
         const currentLocation = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng());
-        // マーカーを立てる
         marker.setPosition(currentLocation);
-        marker.setMap(map_new);
+        marker.setMap(null);
+        marker.setMap(map_edit);
         geocoder.geocode({
           'latLng': currentLocation,
         }, (results, status) => {
@@ -193,15 +187,15 @@
 
       geocoder.geocode({'address': inputAddress},function (results, status) {
         if (status == 'OK') {
-          map_new.setCenter(results[0].geometry.location);
+          map_edit.setCenter(results[0].geometry.location);
 
           // 再検索で前回のピンを消す
           marker.setMap(null);
           marker = new google.maps.Marker({
-            map: map_new,
+            map: map_edit,
             position: results[0].geometry.location
           });
-          // 検索した場所の情報をfieldフォームに渡す
+　　　　　// 検索した場所の情報をfieldフォームに渡す
           const lat = marker.getPosition().lat();
           const lng = marker.getPosition().lng();
           $("#latitude").val(lat);
