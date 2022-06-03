@@ -31,6 +31,11 @@ html {
   height: 500px;
 }
 
+#map_edit {
+  width: 1150px;
+  height: 500px;
+}
+
 .page-top {
   position: fixed;
   right: 5px;
@@ -81,4 +86,71 @@ html {
   padding: 10px;
   margin-top: 3px;
   color: white;
+}
+
+.tab-list {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  list-style-type: none;
+  color: black;
+}
+
+.tab {
+  width: 100%;
+  padding: 10px;
+  cursor: pointer;
+  border-left: solid 1px #CCC;
+  border-bottom: solid 1px #CCC;
+  background-color: #AAAAAA;
+}
+
+.tab:first-child {
+  border-left: none;
+}
+
+.tab-active {
+  color: black;
+  background-color: #BDB76B;
+}
+
+.tab-mouseover {
+  background-color: #666633;
+  transition: background-color 0.5s;
+}
+
+.tabbox {
+  display: none;
+  padding: 15px;
+}
+
+.box-show {
+  display: block;
+}
+
+.tab-container {
+  background-color: black;
+  color: white;
+}
+
+.post-info-item {
+  display: inline-block;
+  width: 100px;
+}
+
+.post-info-address {
+  margin-left: 100px;
+}
+
+.post-info-box {
+  padding: 20px 0;
+  border-bottom: 1px solid white;
+}
+
+.list-header {
+  background-color: #888888;
+}
+
+.table td {
+  vertical-align: middle;
 }

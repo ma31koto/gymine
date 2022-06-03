@@ -5,11 +5,11 @@ class Machine < ApplicationRecord
   has_many :body_parts, through: :machine_bodys
 
   validates :name, presence: true, uniqueness: true
-  attr_accessor :body_part_ids
 
   has_one_attached :machine_image
+  attr_accessor :body_part_ids
 
-  def get_pmachine_image
+  def get_machine_image
     machine_image.attached? ? machine_image : 'no_image.jpg'
   end
 end

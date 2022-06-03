@@ -14,14 +14,18 @@
       <table class="table text-light col-md-8">
         <thead class="list-header">
           <tr>
-            <th width="60%">マシン名</th>
-            <th width="30%">部位</th>
-            <th width="10%"></th>
+            <th width="25%">画像</th>
+            <th width="30%">マシン名</th>
+            <th width="25%">部位</th>
+            <th width="20%"></th>
           </tr>
         </thead>
         <tbody>
           <% @machines.each do |machine| %>
             <tr>
+              <td>
+                <%= image_tag machine.get_machine_image, size: "100x100" %>
+              </td>
               <td>
                 <%= machine.name %>
               </td>
