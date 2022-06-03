@@ -35,9 +35,9 @@ class Admin::PostsController < ApplicationController
     @post = Post.find(params[:id])
     if @post.update(post_params)
       post_params[:machine_ids].each do | postm |
-        machine = MachineType.new(machine_id: machine)
+        machine = MachineType.find(machine_id: machine)
         machine.post_id = @post.id
-        machine.save
+        machine.update
       end
       redirect_to admin_post_path(@post), notice: 'スポット投稿を変更しました!'
     else
