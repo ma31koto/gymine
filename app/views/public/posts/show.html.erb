@@ -1,0 +1,111 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 mt-md-2">
+      <h2>
+        <mark class="bg-secondary text-light">スポット詳細
+        </mark>
+      </h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 mt-md-5">
+      <div class="post-name">
+        <%= @post.name %>
+      </div>
+      <%= image_tag @post.get_post_image, size:"1110x800" %>
+    </div>
+  </div>
+</div>
+
+<div class="tab-container mt-md-3 pb-md-5">
+  <ul class="tab-list">
+    <li class="tab tab-active">
+      <span>店舗情報　アクセス</span>
+    </li>
+    <li class="tab">
+      <span>マシン一覧</span>
+    </li>
+  </ul>
+
+  <div class="tabbox-contents">
+    <div class="tabbox box-show">
+      <div class="row">
+        <div class="col-md-5 offset-md-1">
+          <div class="post-info-box">
+            <span class="post-info-item">
+              <strong>店舗名</strong>
+            </span>
+            <%= @post.name %>
+          </div>
+
+          <div class="post-info-box">
+            <span class="post-info-item">
+              <strong>住所</strong>
+            </span>
+            〒<%= @post.postal_code %>
+            <div class="post-info-address">
+              <%= @post.address %>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-5">
+          <div class="post-info-box">
+            <span class="post-info-item">
+              <strong>紹介文</strong>
+            </span>
+            <%= @post.introduction %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tabbox">
+      <div class="row mb-md-3 p-md-5">
+        <% @post.machines.each do |machine| %>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-4 offset-md-1">
+                <div class="border-bottom border-white">
+                  <%= machine.name %>
+                </div>
+                効果部位：
+                <% machine.body_parts.each do |body_part| %>
+                  <%= body_part.name %>,
+                <% end %>
+              </div>
+              <div class="col-md-5">
+                <%= image_tag machine.get_machine_image, size: "300x200" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // タブメニュー機能
+  $(function() {
+    $('.tab').click(function(){
+      $('.tab-active').removeClass('tab-active');
+      $(this).removeClass('tab-mouseover');
+      $(this).addClass('tab-active');
+      $('.box-show').removeClass('box-show');
+      const index = $(this).index();
+      $('.tabbox').eq(index).addClass('box-show');
+    });
+
+    $('.tab').mouseover(function() {
+      var classes = $(this).attr('class').split(" ");
+      if (classes.includes("tab-active") == true) { return; }
+      $(this).addClass('tab-mouseover');
+    });
+
+    $('.tab').mouseout(function() {
+      $(this).removeClass('tab-mouseover');
+    });
+  });
+</script>
