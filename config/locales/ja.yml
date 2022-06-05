@@ -15,7 +15,7 @@ ja:
       machine: マシン
       body_part: 部位
     attributes:
-      customer:
+      user:
         name: 名前
         email: メールアドレス
         password: パスワード
