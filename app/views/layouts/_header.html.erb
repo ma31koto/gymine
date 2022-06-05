@@ -15,36 +15,36 @@
         <ul class="navbar-nav ml-auto text-light btn">
         <% if user_signed_in? %>
           <li>
-            <%= link_to "マップ検索", map_search_posts_path, class: "border border-white text-light btn ml-md-2" %>
+            <%= link_to "マップ検索", map_search_posts_path, class: "btn header-btn ml-md-2 slide-bg" %>
           </li>
           <li>
-            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "border border-white text-light btn ml-md-2" %>
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn header-btn slide-bg" %>
           </li>
         <% elsif admin_signed_in? %>
           <li>
-            <%= link_to "スポット一覧", admin_posts_path, class: "border border-white text-light btn ml-2" %>
+            <%= link_to "スポット一覧", admin_posts_path, class: "btn header-btn slide-bg" %>
           </li>
           <li>
-            <%= link_to "マシン一覧", admin_machines_path, class: "border border-white text-light btn ml-md-2" %>
+            <%= link_to "マシン一覧", admin_machines_path, class: "btn header-btn slide-bg" %>
           </li>
           <li>
-            <%= link_to "部位一覧", admin_body_parts_path, class: "border border-white text-light btn ml-md-2" %>
+            <%= link_to "部位一覧", admin_body_parts_path, class: "btn header-btn slide-bg" %>
           </li>
           <li>
-            <%= link_to "エリア一覧", admin_areas_path, class: "border border-white text-light btn ml-md-2" %>
+            <%= link_to "エリア一覧", admin_areas_path, class: "btn header-btn slide-bg" %>
           </li>
           <li>
-            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "border border-white text-light btn ml-md-2" %>
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn header-btn slide-bg" %>
           </li>
         <% else %>
           <li>
-            <%= link_to "Home", root_path, class: "nav-link btn" %>
+            <%= link_to "Home", root_path, class: "btn header-btn slide-bg" %>
           </li>
           <li>
-            <%= link_to "新規登録", new_user_registration_path, class: "border border-white text-light btn ml-md-2" %>
+            <%= link_to "新規登録", new_user_registration_path, class: "btn header-btn slide-bg" %>
           </li>
           <li>
-            <%= link_to "ログイン", new_user_session_path, class: "border border-white text-light btn ml-md-2" %>
+            <%= link_to "ログイン", new_user_session_path, class: "btn header-btn slide-bg" %>
           </li>
         <% end %>
         </ul>
