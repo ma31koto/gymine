@@ -22,8 +22,8 @@ header {
     color: white;
     transition: all 0.3s;
     border: 1px solid white;
-    margin-left: 30px;
-    width: 100px;
+    margin-left: 20px;
+    width: 130px;
 
     &.slide-bg {
         position: relative;
@@ -64,7 +64,7 @@ header {
 
 .link {
   text-decoration: none;
-  color: #BDB76B ; 
+  color: #BDB76B ;
 }
 
 .home-image {
@@ -86,7 +86,7 @@ header {
   transform: translate(-50%, -50%);
   color: white;
   opacity: 0;
-  font-size: 2em;
+  font-size: 50px;
 
   &.inview {
     opacity: 1;
@@ -176,8 +176,18 @@ html {
     background: gray;
 }
 
+.post-main-box {
+  position: relative;
+}
+
 .post-name {
+  position: absolute;
+  top: 3%;
+  left: 5%;
   font-size: 30px;
+  background-color: #00000099;
+  color: white;
+  padding: 10px 70px 10px 15px;
 }
 
 .post-item {
