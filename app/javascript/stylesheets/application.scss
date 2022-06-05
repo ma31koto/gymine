@@ -1,5 +1,6 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import "mixin";
 
 * {
   margin: 0;
@@ -23,8 +24,66 @@ header {
   color: white;
 }
 
-html {
-  scroll-behavior: smooth;
+
+.home-image {
+  background-image: url("../images/gymine_home.jpg");
+  background-size: cover;
+  margin: 0 auto;
+  height: 550px;
+}
+
+#home-container {
+  position: relative;
+  height: 500px;
+}
+
+.animate-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  opacity: 0;
+  font-size: 2em;
+
+  &.inview {
+    opacity: 1;
+
+    & .char {
+      display: inline-block;
+
+      @include animation(
+        $name: kf-animate-chars,
+        $duration: 0.5s,
+        $timing-function: cubic-bezier(0.39, 1.57, 0.58, 1),
+        $fill-mode: both
+      );
+
+      @for $i from 1 through 6 {
+          &:nth-child(#{$i}) {
+              animation-delay: $i * 0.2s;
+          }
+      }
+    }
+  }
+}
+
+@keyframes kf-animate-chars {
+  0% {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.login-btn {
+  position: absolute;
+  top: 60%;
+  width: 100%;
 }
 
 #map {
@@ -42,38 +101,37 @@ html {
   height: 500px;
 }
 
-.page-top {
-  position: fixed;
-  right: 5px;
-  bottom: 20px;
-  height: 50px;
-  text-decoration: none;
-  font-weight: bold;
-  transform: rotate(90deg);
-  font-size: 90%;
-  line-height: 1.5rem;
-  color: white;
-  padding: 0 0 0 35px;
-  border-top: solid 1px;
-  position: fixed;
-  bottom: 50px;
-  right: 50px;
-  z-index: 10000;
+html {
+  scroll-behavior: smooth;
 }
-.page-top::before {
+
+.page-top {
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    background: white;
+    color: black;
+}
+
+.page-top a {
+  display: flex;
+}
+
+.page-top a::before{
   content: "";
-  display: block;
-  position: absolute;
-  top: -1px;
-  left: 0px;
-  width: 15px;
-  border-top: solid 1px;
-  transform: rotate(35deg);
-  transform-origin: left top;
+  width: 20px;
+  height: 20px;
+  border-top: 3px solid black;
+  border-right: 3px solid black;
+  transform: rotate(-45deg);
+  margin: 15px;
 }
 
 .page-top:hover {
-  color: #BDB76B;
+    background: gray;
 }
 
 .post-name {
