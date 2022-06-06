@@ -90,6 +90,48 @@
           </div>
         </div>
 
+        <div class="row text-left offset-md-1">
+          <div class="col-md-4 post-item ml-md-0">
+            <%= f.label :access, "アクセス" %>
+          </div>
+          <div class="col-md-7 post-form-item">
+            <%= f.text_field :access, :placeholder =>"例：JR〇〇線 〇〇駅 B1出口 徒歩３分", size:50, class: "post-form" %>
+            <% if @post.errors.include?(:access) %>
+              <p style="color: red;">
+                <%= @post.errors.full_messages_for(:access).first %>
+              </p>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="row text-left offset-md-1">
+          <div class="col-md-4 post-item ml-md-0">
+            <%= f.label :opening_hour, "営業時間" %>
+          </div>
+          <div class="col-md-7 post-form-item">
+            <%= f.text_field :opening_hour, :placeholder =>"例：8:00~23:00", size:50, class: "post-form" %>
+            <% if @post.errors.include?(:opening_hour) %>
+              <p style="color: red;">
+                <%= @post.errors.full_messages_for(:opening_hour).first %>
+              </p>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="row text-left offset-md-1">
+          <div class="col-md-4 post-item ml-md-0">
+            <%= f.label :phone_number, "電話番号" %>
+          </div>
+          <div class="col-md-7 post-form-item">
+            <%= f.text_field :phone_number, :placeholder =>"例：00-0000-0000", size:50, class: "post-form" %>
+            <% if @post.errors.include?(:phone_number) %>
+              <p style="color: red;">
+                <%= @post.errors.full_messages_for(:phone_number).first %>
+              </p>
+            <% end %>
+          </div>
+        </div>
+
         <div class="row text-left  offset-md-1">
           <div class="col-md-4 post-item ml-md-0">
             <%= f.label :post_image, "スポット画像" %>

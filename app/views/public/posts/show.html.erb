@@ -50,6 +50,13 @@
               <%= @post.address %>
             </div>
           </div>
+
+          <div class="post-info-box">
+            <span class="post-info-item">
+              <strong>アクセス</strong>
+            </span>
+            <%= @post.access %>
+          </div>
         </div>
 
         <div class="col-md-5">
@@ -58,6 +65,20 @@
               <strong>紹介文</strong>
             </span>
             <%= @post.introduction %>
+          </div>
+
+          <div class="post-info-box">
+            <span class="post-info-item">
+              <strong>営業時間</strong>
+            </span>
+            <%= @post.opening_hour %>
+          </div>
+
+          <div class="post-info-box">
+            <span class="post-info-item">
+              <strong>電話番号</strong>
+            </span>
+            <%= @post.phone_number %>
           </div>
         </div>
       </div>

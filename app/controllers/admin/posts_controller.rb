@@ -34,11 +34,17 @@ class Admin::PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
-      post_params[:machine_ids].each do | postm |
-        machine = MachineType.find(machine_id: machine)
-        machine.post_id = @post.id
-        machine.update
-      end
+        machine_all = MachineType.where(post_id: @post.id)
+        machine_all.each do |old_machine|
+          old_machine.destroy
+        end
+        unless post_params[:machine_ids] == nil
+          post_params[:machine_ids].each do | postm |
+            machine = MachineType.new(machine_id: postm)
+            machine.post_id = @post.id
+            machine.save
+          end
+        end
       redirect_to admin_post_path(@post), notice: 'スポット投稿を変更しました!'
     else
       render :edit
@@ -60,6 +66,9 @@ class Admin::PostsController < ApplicationController
       :postal_code, :address, :longitude, :latitude,
       :area_id,
       :post_image,
+      :opening_hour,
+      :access,
+      :phone_number,
       machine_ids: []
       )
   end
