@@ -28,6 +28,9 @@ ja:
         name: 名前
         introduction: 説明文
         area_id: エリア
+        opening_hour: 営業時間
+        accsess: アクセス
+        phone_number: 電話番号
       area:
         name: 名前
       machine:
