@@ -5,6 +5,8 @@
         ようこそ、<%= current_user.name %>さん！
       <% elsif admin_signed_in? %>
         管理者ログイン中
+      <% else %>
+        あなたの最適なジムを発見しよう！
       <% end %>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"  style="background-color: #BDB76B;">
