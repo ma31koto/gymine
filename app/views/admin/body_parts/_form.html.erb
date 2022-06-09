@@ -7,7 +7,7 @@
       <div class="ml-md-3">
         <%= f.text_field :name, placeholder: "部位名", size: 30 %>
         <% if flash[:danger].present?  %>
-          <p style="color: red;">名前を入力してください</p>
+          <p style="color: yellow;">名前を入力してください</p>
         <% end %>
       </div>
       <div class="ml-md-3">
@@ -22,7 +22,7 @@
       <div class="ml-md-3">
         <%= f.text_field :name, size: 30 %>
         <% if @body_part.errors.include?(:name) %>
-          <p style="color: red;">
+          <p style="color: yellow;">
             <%= body_part.errors.full_messages_for(:name).first %>
           </p>
         <% end %>

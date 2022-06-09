@@ -27,7 +27,7 @@
           <div class="col-md-7 post-form-item">
             <%= f.text_field :name, :placeholder =>"例：筋肉ジム(新宿店)", size:50, class: "post-form" %>
             <% if @post.errors.include?(:name) %>
-              <a style="color: red;">
+              <a style="color: yellow;">
                 <%= @post.errors.full_messages_for(:name).first %>
               </a>
             <% end %>
@@ -41,7 +41,7 @@
           <div class="col-md-7 post-form-item">
             <%= f.text_area :introduction, :placeholder =>"例:平日の昼時は人が少なく穴場です！", size: "50x5", class: "post-form" %>
             <% if @post.errors.include?(:introduction) %>
-              <a style="color: red;">
+              <a style="color: yellow;">
                 <%= @post.errors.full_messages_for(:introduction).first %>
               </a>
             <% end %>
@@ -55,7 +55,7 @@
           <div class="col-md-7 post-form-item">
             <%= f.text_field :postal_code, :placeholder =>"自動入力",id: "postal_code", size: 50, class: "post-form" %>
             <% if @post.errors.include?(:postal_code) %>
-              <a style="color: red;">
+              <a style="color: yellow;">
                 <%= @post.errors.full_messages_for(:postal_code).first %>
               </a>
             <% end %>
@@ -69,7 +69,7 @@
           <div class="col-md-7 post-form-item">
             <%= f.text_field :address, :placeholder =>"自動入力", id: "input_address", size: 50, class: "post-form" %>
             <% if @post.errors.include?(:address) %>
-              <a style="color: red;">
+              <a style="color: yellow;">
                 <%= @post.errors.full_messages_for(:address).first %>
               </a>
             <% end %>
@@ -83,7 +83,7 @@
           <div class="col-md-7 post-form-item">
             <%= f.collection_select :area_id, Area.all, :id, :name, include_blank: "----", class: "post-control", size: 50 %>
             <% if @post.errors.include?(:area_id) %>
-              <p style="color: red;">
+              <p style="color: yellow;">
                 <%= @post.errors.full_messages_for(:area_id).first %>
               </p>
             <% end %>
@@ -97,7 +97,7 @@
           <div class="col-md-7 post-form-item">
             <%= f.text_field :access, :placeholder =>"例：JR〇〇線 〇〇駅 B1出口 徒歩３分", size:50, class: "post-form" %>
             <% if @post.errors.include?(:access) %>
-              <p style="color: red;">
+              <p style="color: yellow;">
                 <%= @post.errors.full_messages_for(:access).first %>
               </p>
             <% end %>
@@ -111,7 +111,7 @@
           <div class="col-md-7 post-form-item">
             <%= f.text_field :opening_hour, :placeholder =>"例：8:00~23:00", size:50, class: "post-form" %>
             <% if @post.errors.include?(:opening_hour) %>
-              <p style="color: red;">
+              <p style="color: yellow;">
                 <%= @post.errors.full_messages_for(:opening_hour).first %>
               </p>
             <% end %>
@@ -125,7 +125,7 @@
           <div class="col-md-7 post-form-item">
             <%= f.text_field :phone_number, :placeholder =>"例：00-0000-0000", size:50, class: "post-form" %>
             <% if @post.errors.include?(:phone_number) %>
-              <p style="color: red;">
+              <p style="color: yellow;">
                 <%= @post.errors.full_messages_for(:phone_number).first %>
               </p>
             <% end %>

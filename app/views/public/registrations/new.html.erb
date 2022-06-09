@@ -24,7 +24,7 @@
               <%= f.text_field :name, autofocus: true, :placeholder =>"例：筋肉太郎", size: 30 %>
             </div>
             <% if @user.errors.include?(:name) %>
-              <p style="color: red;" class="offset-md-3 pl-md-3">
+              <p style="color: yellow;" class="offset-md-3 pl-md-3">
                 <%= @user.errors.full_messages_for(:name).first %>
               </p>
             <% end %>
@@ -38,7 +38,7 @@
               <%= f.email_field :email, :placeholder =>"例：sample@example.com", size: 30 %>
             </div>
             <% if @user.errors.include?(:email) %>
-              <p style="color: red;" class="offset-md-3 pl-md-3">
+              <p style="color: yellow;" class="offset-md-3 pl-md-3">
                 <%= @user.errors.full_messages_for(:email).first %>
               </p>
             <% end %>
@@ -52,7 +52,7 @@
               <%= f.password_field :password, autocomplete: "new-password", size: 30 %>
             </div>
             <% if @user.errors.include?(:password) %>
-              <p style="color: red;" class="offset-md-3 pl-md-3">
+              <p style="color: yellow;" class="offset-md-3 pl-md-3">
                 <%= @user.errors.full_messages_for(:password).first %>
               </p>
             <% end %>
@@ -66,7 +66,7 @@
               <%= f.password_field :password_confirmation, autocomplete: "new-password", size: 30 %>
             </div>
             <% if @user.errors.include?(:password) %>
-              <p style="color: red;" class="offset-md-3 pl-md-3">
+              <p style="color: yellow;" class="offset-md-3 pl-md-3">
                 <%= @user.errors.full_messages_for(:password).first %>
               </p>
             <% end %>
